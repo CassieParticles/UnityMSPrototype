@@ -5,6 +5,10 @@ namespace MarchingSquaresTool.Scripts
 {
     public class VoxelGrid
     {
+                
+        private float[] grid;
+        private Vector2Int size;
+        private Vector2Int position;
         public VoxelGrid(int width = 1, int height = 1)
         {
             grid = new float[width * height];
@@ -28,11 +32,19 @@ namespace MarchingSquaresTool.Scripts
 
         public float this[int x, int y]
         {
-            get => grid[(y + position.y) * size.x + (x + position.x)];
-            set => grid[(y + position.y) * size.x + (x + position.x)] = value;
+            get => grid[(y) * size.x + (x)];
+            set => grid[(y) * size.x + (x)] = value;
         }
 
-        public void AddRowTop(float defaultValue = 0)
+        public void AddBorder(float defaultValue = 0)
+        {
+            AddRowTop(defaultValue);
+            AddRowBottom(defaultValue);
+            AddColumnLeft(defaultValue);
+            AddColumnRight(defaultValue);
+        }
+
+        private void AddRowTop(float defaultValue = 0)
         {
             //Add new row
             float[] newGrid =  new float[size.x * (size.y + 1)];
@@ -47,7 +59,7 @@ namespace MarchingSquaresTool.Scripts
             grid = newGrid;
         }
 
-        public void AddRowBottom(float defaultValue = 0)
+        private void AddRowBottom(float defaultValue = 0)
         {
             float[] newGrid =  new float[size.x * (size.y + 1)];
             Array.Copy(grid, newGrid, grid.Length);
@@ -59,7 +71,7 @@ namespace MarchingSquaresTool.Scripts
             grid = newGrid;
         }
 
-        public void AddColumnLeft(float defaultValue = 0)
+        private void AddColumnLeft(float defaultValue = 0)
         {
             float[] newGrid = new float[(size.x + 1) * size.y];
             for (int i = 0; i < size.y; ++i)
@@ -72,7 +84,7 @@ namespace MarchingSquaresTool.Scripts
             position.x--;
         }
 
-        public void AddColumnRight(float defaultValue = 0)
+        private void AddColumnRight(float defaultValue = 0)
         {
             float[] newGrid = new float[(size.x + 1) * size.y];
             for (int i = 0; i < size.y; ++i)
@@ -84,9 +96,17 @@ namespace MarchingSquaresTool.Scripts
             grid = newGrid;
         }
         
+        public Vector2Int GetSize()
+        {
+            return size;
+        }
 
-        private float[] grid;
-        private Vector2Int size;
-        private Vector2Int position;
+        public Vector2Int GetPosition()
+        {
+            return position;
+        }
+
+
+
     }
 }
