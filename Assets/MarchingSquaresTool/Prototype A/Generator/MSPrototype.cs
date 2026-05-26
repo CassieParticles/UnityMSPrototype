@@ -5,19 +5,21 @@ using UnityEngine;
 namespace MarchingSquaresTool.Scripts
 {
     [RequireComponent(typeof(VoxelGridComp))]
-    [RequireComponent(typeof(MeshBuilder))]
-    [RequireComponent(typeof(EdgeCollider2D))]
     public class MSPrototype : MonoBehaviour
     {
         private VoxelGridComp grid;
-        private MeshBuilder builder;
         private EdgeCollider2D edgeCollider2D;
+
+        private IBuildTriangles[] triangleBuilders;
+        private IBuildEdges[] edgeBuilders;
 
         private void Awake()
         {
             grid = GetComponent<VoxelGridComp>();
             edgeCollider2D = GetComponent<EdgeCollider2D>();
-            builder = GetComponent<MeshBuilder>();
+
+            triangleBuilders = GetComponents<IBuildTriangles>();
+            edgeBuilders = GetComponents<IBuildEdges>();
         }
 
         private void Start()
@@ -27,7 +29,6 @@ namespace MarchingSquaresTool.Scripts
 
         public void Generate()
         {
-            
             List<Vector2> edgeVertices = new List<Vector2>();
             
             int width = grid.grid.GetSize().x;
@@ -80,19 +81,37 @@ namespace MarchingSquaresTool.Scripts
                         triangle.C = vertices[MSHelperFunctions.triangleIndexTable[index,i + 2]];
                         
                         //TODO: Use array of abstract triangle builders
-                        builder.AddTriangle(triangle,vertices[0]);
+                        foreach (var builder in triangleBuilders)
+                        {
+                            builder.AddTriangle(triangle,new Vector2Int(x,y));
+                        }
                     }
                     
                     
                     //Edge assembly
                     for (int i = 0; MSHelperFunctions.edgeIndexTable[index,i] != 8; i += 2)
                     {
-                        
+                        Edge edge = new  Edge();
+                        edge.A = vertices[MSHelperFunctions.edgeIndexTable[index,i + 0]];
+                        edge.B = vertices[MSHelperFunctions.edgeIndexTable[index,i + 1]];
+
+                        foreach (var builder in edgeBuilders)
+                        {
+                            builder.AddEdge(edge,new Vector2Int(x,y));
+                        }
                     }
                 }
             }
             
-            builder.Build();
+            foreach (var builder in triangleBuilders)
+            {
+                builder.Build();
+            }
+
+            foreach (var builder in edgeBuilders)
+            {
+                builder.Build();
+            }
         }
     }
 }

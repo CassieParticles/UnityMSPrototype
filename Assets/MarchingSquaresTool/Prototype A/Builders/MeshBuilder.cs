@@ -19,7 +19,7 @@ namespace MarchingSquaresTool.Scripts
             indices = new List<int>();
         }
 
-        public void AddTriangle(Triangle triangle, Vector2 cellPosition)
+        public void AddTriangle(Triangle triangle, Vector2Int cellPosition)
         {
             //Lazy approach, may need to be replaced
             vertices.Add(triangle.A);

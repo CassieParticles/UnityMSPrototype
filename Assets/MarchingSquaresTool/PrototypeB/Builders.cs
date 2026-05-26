@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MarchingSquaresTool.Scripts
+namespace PrototypeB.MarchingSquaresTool.PrototypeB
 {
     public struct Triangle
     {
@@ -17,13 +17,13 @@ namespace MarchingSquaresTool.Scripts
     
     public interface IBuildTriangles
     {
-        public void AddTriangle(Triangle triangle, Vector2 cellPosition);
+        public void AddTriangle(Triangle triangle, Vector2Int cellPosition);
         public void Build();
     }
 
     public interface IBuildEdges
     {
-        public void AddEdge(Edge edge, Vector2 cellPosition);
+        public void AddEdge(Edge edge, Vector2Int cellPosition);
         public void Build();
     }
 }
