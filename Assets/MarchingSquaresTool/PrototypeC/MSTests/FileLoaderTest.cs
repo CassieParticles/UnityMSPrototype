@@ -1,6 +1,6 @@
+using MarchingSquaresTool.PrototypeC.Core;
 using MarchingSquaresTool.PrototypeC.FileLoader;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeC.MSTests
 {
@@ -16,15 +16,16 @@ namespace MarchingSquaresTool.PrototypeC.MSTests
             string levelName = "TestLevel1x1";
         
             //Attempt to store the level (THE IMPORTANT PART)
-            LevelFileHandler.StoreLevel(cellArray,1,1,levelName);
-
-            uint width = 0;
-            uint height = 0;
+            LevelFileHandler.StoreLevel(cellArray,1,1, 0, 0,levelName);
+            
         
-            Cell[] loadedLevel = LevelFileHandler.LoadLevel(levelName,ref width,ref height);
+            Cell[] loadedLevel = LevelFileHandler.LoadLevel(levelName,out uint width,out uint height, out uint fetchedOriginX, out uint fetchedOriginY);
 
             Assert.AreEqual(1,width,"Width is accurate");
             Assert.AreEqual(1,height,"Height is accurate");
+            
+            Assert.AreEqual(0,fetchedOriginX,"OriginX is accurate");
+            Assert.AreEqual(0,fetchedOriginY,"OriginY is accurate");
         
             for (int i = 0; i < cellArray.Length; ++i)
             {
@@ -40,6 +41,8 @@ namespace MarchingSquaresTool.PrototypeC.MSTests
             //Set up
             uint width = 8;
             uint height = 8;
+            uint originX = 0;
+            uint originY = 0;
             string levelName = "TestLevel8x8";
         
             Cell[] cellArray = new Cell[]
@@ -54,16 +57,16 @@ namespace MarchingSquaresTool.PrototypeC.MSTests
                 new Cell(-1,true),new Cell(1,false),new Cell(-1,true),new Cell(1,false),new Cell(-1,true),new Cell(1,false),new Cell(-1,true),new Cell(1,false),
             };
             
-            LevelFileHandler.StoreLevel(cellArray, 8, 8, levelName);
-        
-            uint fetchedWidth = 0;
-            uint fetchedHeight = 0;
-        
-            Cell[] loadedLevel = LevelFileHandler.LoadLevel(levelName,ref fetchedWidth,ref fetchedHeight);
+            LevelFileHandler.StoreLevel(cellArray, 8, 8, originX, originY, levelName);
+            
+            Cell[] loadedLevel = LevelFileHandler.LoadLevel(levelName,out uint fetchedWidth,out uint fetchedHeight, out uint fetchedOriginX, out uint fetchedOriginY);
         
             //Ensure loaded level is identical to stored one
             Assert.AreEqual(width,fetchedWidth,"Width is accurate");
             Assert.AreEqual(height,fetchedHeight,"Height is accurate");
+            
+            Assert.AreEqual(originX,fetchedOriginX,"OriginX is accurate");
+            Assert.AreEqual(originY,fetchedOriginY,"OriginY is accurate");
 
             for (int i = 0; i < cellArray.Length; ++i)
             {

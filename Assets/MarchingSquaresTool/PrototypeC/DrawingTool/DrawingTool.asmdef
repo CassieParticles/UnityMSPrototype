@@ -1,3 +1,4 @@
 {
-	"name": "DrawingTool"
+	"name": "DrawingTool",
+	"references":[ "GUID:02d37ed1870587f48bd231cc146b88c8" ]
 }

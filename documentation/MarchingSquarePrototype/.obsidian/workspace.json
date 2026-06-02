@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6daaad5e160124a2",
+        "id": "48f9bf80271291fe",
         "type": "tabs",
         "children": [
           {
-            "id": "83dbe4e8ce2f5097",
+            "id": "2239ca065624ae62",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "FileHandling/LevelFileHandler.md",
+                "file": "TODO.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for LevelFileHandler"
+              "title": "Backlinks for TODO"
             }
           },
           {
@@ -113,12 +113,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "FileHandling/LevelFileHandler.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from LevelFileHandler"
+              "title": "Outgoing links"
             }
           },
           {
@@ -156,13 +155,34 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "FileHandling/LevelFileHandler.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of LevelFileHandler"
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "6555ba5aa1580cf1",
+            "type": "leaf",
+            "state": {
+              "type": "reminder-list",
+              "state": {},
+              "icon": "clock",
+              "title": "Reminders"
+            }
+          },
+          {
+            "id": "8f01d8c8cf55f451",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "TODO.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties for TODO"
             }
           }
         ]
@@ -180,20 +200,28 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "83dbe4e8ce2f5097",
+  "active": "2239ca065624ae62",
   "lastOpenFiles": [
-    "Goals.md",
-    "Core/Cell.md",
+    "Core/BodyGrid.md",
     "FileHandling/LevelFileHandler.md",
+    "Core/Cell.md",
+    "Generator/MSGenerator.md",
+    "Goals.md",
+    "TODO.md",
+    "Core/LevelNode.md",
+    "Generator",
+    "Level.md",
+    "Untitled.canvas",
+    "Untitled.base",
     "Untitled.md",
     "FileHandling",
     "Core",
     "DrawingTool/Level(File).md",
     "EditorDrawingTool",
-    "Welcome.md",
-    "Untitled.canvas"
+    "Welcome.md"
   ]
 }

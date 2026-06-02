@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MarchingSquaresTool.PrototypeC
+namespace MarchingSquaresTool.PrototypeC.Core
 {
-    public struct Cell : IEquatable<Cell>
+    public struct Cell
     {
-        public Cell(float terrain = 0, bool solid = true)
+        public Cell(float terrain = -1.0f, bool solid = true)
         {
             this.Terrain = terrain;
             this.Solid = solid;
