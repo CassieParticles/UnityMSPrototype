@@ -10,6 +10,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
 {
     public class MSGenerator : MonoBehaviour
     {
+        [SerializeField] private string levelName;
+        
         private BodyGrid _grid;
         
         private IBuildTriangles[] _triangleBuilders;
@@ -24,14 +26,14 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             _grid = new BodyGrid();
         }
         
-        public void SaveLevel(string name)
+        public void SaveLevel()
         {
-            LevelFileHandler.StoreLevel(_grid, name);
+            LevelFileHandler.StoreLevel(_grid, levelName);
         }
 
-        public void LoadLevel(string name)
+        public void LoadLevel()
         {
-            _grid = LevelFileHandler.LoadLevel(name);
+            _grid = LevelFileHandler.LoadLevel(levelName);
         }
     }
 }

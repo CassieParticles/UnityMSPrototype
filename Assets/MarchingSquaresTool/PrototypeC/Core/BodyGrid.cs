@@ -28,7 +28,9 @@ namespace MarchingSquaresTool.PrototypeC.Core
 
         public BodyGrid(Cell[] cells, Vector2Int size, Vector2Int origin)
         {
-            
+            Grid = cells;
+            _size = size;
+            _origin = origin;
         }
         
         public Cell this[int x, int y]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,38 +7,59 @@ using UnityEngine.UIElements;
 namespace MarchingSquaresTool.PrototypeC.MSGenerator
 {
     [CustomEditor(typeof(MSGenerator))]
+    [Serializable]
     public class MSInspector : Editor
     {
         private TextField _levelName;
+        private SerializedProperty _level;
+
+        private void PreReload()
+        {
+            _level.stringValue = _levelName.text;
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void PostReload()
+        {
+            _levelName.value = _level.stringValue;
+        }
 
         private void OnEnable()
         {
+            _level = serializedObject.FindProperty("levelName");
+            _levelName = new TextField("Level Name") {value = _level.stringValue};
+            
+            AssemblyReloadEvents.beforeAssemblyReload += PreReload;
+            AssemblyReloadEvents.afterAssemblyReload += PostReload;
+
             AssemblyReloadEvents.beforeAssemblyReload += SaveLevel;
         }
 
         private void OnDisable()
         {
+            _level.stringValue = _levelName.text;
+            serializedObject.ApplyModifiedProperties();
+            
+            AssemblyReloadEvents.beforeAssemblyReload -= PreReload;
+            AssemblyReloadEvents.afterAssemblyReload -= PostReload;
+            
             AssemblyReloadEvents.beforeAssemblyReload -= SaveLevel;
         }
 
-        private void LoadLevel()
+        public void LoadLevel()
         {
-            Debug.Log("Loading "+ _levelName.text);
-            ((MSGenerator)target).LoadLevel(_levelName.text);//sad
-        }
-        
-        private void SaveLevel()
-        {
-            Debug.Log("Saving "+ _levelName.text);
-            ((MSGenerator)target).SaveLevel(_levelName.text);
+            ((MSGenerator)target).LoadLevel();
         }
 
+        private void SaveLevel()
+        {
+            ((MSGenerator)target).SaveLevel();
+        }
         
         public override VisualElement CreateInspectorGUI()
         {
             VisualElement inspector = new VisualElement();
-
-            _levelName = new TextField("Level Name");
+            
             inspector.Add(_levelName);
             
             inspector.Add(new Button(LoadLevel) {text = "Load Level"});
