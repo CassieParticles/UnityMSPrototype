@@ -1,3 +1,4 @@
 ﻿{
-  "name": "MSGenerator"
+  "name": "MSGenerator",
+  "references":[ "GUID:02d37ed1870587f48bd231cc146b88c8", "GUID:2eb193a9bc6f4863a2a4097bb236b30d" ]
 }

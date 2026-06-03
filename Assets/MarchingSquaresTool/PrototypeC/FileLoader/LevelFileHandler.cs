@@ -41,6 +41,8 @@ namespace MarchingSquaresTool.PrototypeC.FileLoader
                 Buffer.BlockCopy(terrainBuffer,0,levelData,16 + (i * 5),4);
                 Buffer.BlockCopy(solidBuffer,0,levelData,16 + (i * 5) + 4,1);
             }
+
+            Directory.CreateDirectory(Application.dataPath + LevelPath);
             
             //Write the data
             File.WriteAllBytes(Application.dataPath + LevelPath + title + ".lvl", levelData);
