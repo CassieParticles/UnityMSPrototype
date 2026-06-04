@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MarchingSquaresTool.PrototypeC.Core
 {
-    public struct Cell
+    public class Cell
     {
         public Cell(float terrain = -1.0f, bool solid = true)
         {

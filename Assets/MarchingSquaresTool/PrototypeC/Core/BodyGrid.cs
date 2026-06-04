@@ -42,6 +42,32 @@ namespace MarchingSquaresTool.PrototypeC.Core
                 _changes.Push(new Vector2Int(x, y));
             }
         }
+
+        public Cell ExpandToFit(int x, int y)
+        {
+            //expand left to meet point
+            while (x < -_origin.x)
+            {
+                AddColumnLeft();
+            }
+            //expand right to meet point
+            while (x >= _size.x - _origin.x)
+            {
+                AddColumnRight();
+            }
+            //expand up to meet point
+            while (y < -_origin.y)
+            {
+                AddRowTop();
+            }
+            //expand down to meet point
+            while (y >= _size.y - _origin.y)
+            {
+                AddRowBottom();
+            }
+            
+            return Grid[GetIndex(x, y)];
+        }
         
         public bool Resized
         {
@@ -105,7 +131,7 @@ namespace MarchingSquaresTool.PrototypeC.Core
             for (int i = 0; i < _size.y; ++i)
             {
                 //Add new column
-                newGrid[i * (_size.x) + 1] = new Cell();
+                newGrid[i * (_size.x + 1)] = new Cell();
                 //Copy old row
                 Array.Copy(Grid,i*_size.x, newGrid,i * (_size.x + 1) + 1, _size.x);
             }

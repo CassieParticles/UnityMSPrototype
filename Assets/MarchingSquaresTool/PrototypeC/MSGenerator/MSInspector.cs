@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace MarchingSquaresTool.PrototypeC.MSGenerator
 {
-    [CustomEditor(typeof(MSGenerator))]
+    [CustomEditor(typeof(MSEditor))]
     [Serializable]
     public class MSInspector : Editor
     {
@@ -48,12 +48,12 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
 
         public void LoadLevel()
         {
-            ((MSGenerator)target).LoadLevel();
+            ((MSEditor)target).LoadLevel();
         }
 
         private void SaveLevel()
         {
-            ((MSGenerator)target).SaveLevel();
+            ((MSEditor)target).SaveLevel();
         }
         
         public override VisualElement CreateInspectorGUI()
