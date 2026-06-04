@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using JetBrains.Annotations;
 using log4net.Core;
 using MarchingSquaresTool.PrototypeC.Core;
 using PlasticPipe.Client;
@@ -48,16 +49,33 @@ namespace MarchingSquaresTool.PrototypeC.FileLoader
             File.WriteAllBytes(Application.dataPath + LevelPath + title + ".lvl", levelData);
         }
 
+        [CanBeNull]
         public static BodyGrid LoadLevel(string title)
         {
             Cell[] cells = LoadLevel(title, out uint width, out uint height, out uint originX, out uint originY);
-
+            //Level doesn't exist
+            if (cells == null)
+            {
+                return null;
+            }
+            
             return new BodyGrid(cells, new Vector2Int((int)width, (int)height), new Vector2Int((int)originX, (int)originY));
         }
         
+        [CanBeNull]
         public static Cell[] LoadLevel(string title, out uint width, out uint height, out uint originX,
             out uint originY)
         {
+            //Level doesn't exist
+            if (File.Exists(Application.dataPath + LevelPath + title + ".lvl"))
+            {
+                width = 0;
+                height = 0;
+                originX = 0;
+                originY = 0;
+                return null;
+            }
+            
             //Get the size of the level
             byte[] levelData = File.ReadAllBytes(Application.dataPath + LevelPath + title + ".lvl");
             
