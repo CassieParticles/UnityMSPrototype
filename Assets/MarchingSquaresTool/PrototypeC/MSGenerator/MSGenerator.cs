@@ -46,6 +46,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             Vector2Int position = -Grid.Origin;
             Vector2Int size = Grid.Size;
 
+            bool solid = false;
+
             for (int y = position.y; y < position.y + size.y - 1; y++)
             {
                 for (int x = position.x; x < position.x + size.x - 1; x++)
@@ -57,11 +59,17 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
                         Grid[x + 1,y + 1].Terrain,
                         Grid[x,y + 1].Terrain,
                     };
+                    solid = solid || Grid[x, y].Solid;
+                    solid = solid || Grid[x + 1, y].Solid;
+                    solid = solid || Grid[x + 1, y + 1].Solid;
+                    solid = solid || Grid[x, y + 1].Solid;
+
 
                     int index = 0;
                     for (int i = 0; i < 4; ++i)
                     {
                         index += (cornerValues[i] > 0 ? (1 << i) : 0);
+
                     }
 
                     //Zero values depend on surrounding values (easier to temporarily leave blank then update after)
@@ -114,11 +122,13 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
 
             foreach (IBuildTriangles builder in _triangleBuilders)
             {
+                builder.SetSolid(solid);
                 builder.Build();
             }
 
             foreach (IBuildEdges builder in _edgeBuilders)
             {
+                builder.SetSolid(solid);
                 builder.Build();
             }
         }
