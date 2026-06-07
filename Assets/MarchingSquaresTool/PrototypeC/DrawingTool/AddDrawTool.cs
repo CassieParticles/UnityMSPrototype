@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeC.DrawingTool
 {
-    [EditorTool("Circle Drawing Tool",typeof(MSLevelEditor))]
-    public class CircleDrawingTool: ADrawingTool
+    [EditorTool("Add",typeof(MSLevelEditor))]
+    public class AddDrawTool: ADrawingTool
     {
         private float _radius = 3f;
         public override void Draw(BodyGrid grid, Vector2 mousePosition, bool solid)
