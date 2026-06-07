@@ -16,12 +16,13 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator.TriangleComp
         private void OnValidate()
         {
             _meshFilter = GetComponent<MeshFilter>();
+            _vertices = new List<Vector3>();
+            _indices = new List<int>();
         }
 
         private void Awake()
         {
             _meshFilter = GetComponent<MeshFilter>();
-            
             _vertices = new List<Vector3>();
             _indices = new List<int>();
         }

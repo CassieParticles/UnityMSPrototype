@@ -74,6 +74,10 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                 Vector2 worldSpace = scene.camera.ScreenToWorldPoint(screenPos);
                 
                 Draw(Target.Generator.Grid,worldSpace,_shiftDown);
+                
+                //Update marching squares
+                Target.Generator.Clear();
+                Target.Generator.Generate();
             }
         }
 
