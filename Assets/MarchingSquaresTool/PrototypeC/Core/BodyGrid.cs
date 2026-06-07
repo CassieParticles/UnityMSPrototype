@@ -43,7 +43,7 @@ namespace MarchingSquaresTool.PrototypeC.Core
             }
         }
 
-        public Cell ExpandToFit(int x, int y)
+        public Cell DrawPoint(int x, int y)
         {
             //expand left to meet point
             while (x < -_origin.x)

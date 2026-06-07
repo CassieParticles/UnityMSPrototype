@@ -44,7 +44,7 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                         return;
                     }
 
-                    _target.generator.Grid.ExpandToFit(nearestPoint.x,nearestPoint.y).Terrain = 1.0f;
+                    _target.generator.Grid.DrawPoint(nearestPoint.x,nearestPoint.y).Terrain = 1.0f;
                 }
             }
         }
