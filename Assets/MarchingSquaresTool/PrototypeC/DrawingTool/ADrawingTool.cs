@@ -11,9 +11,13 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
     {
         protected MSLevelEditor Target { get; private set; }
 
+        private bool _mouseDown;
+        private bool _shiftDown;
+
         private void OnEnable()
         {
             Target = (MSLevelEditor)target;
+            _mouseDown = false;
         }
 
         private void OnDisable()
@@ -36,7 +40,26 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
             int id = GUIUtility.GetControlID(FocusType.Passive);
             HandleUtility.AddDefaultControl(id);
 
-            if (Event.current.type == EventType.MouseDown)
+            //Get mouse button events
+            if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
+            {
+                _mouseDown = true;
+            }
+            if (Event.current.type == EventType.MouseUp && Event.current.button == 0)
+            {
+                _mouseDown = false;
+            }
+            //Get key events
+            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.LeftShift)
+            {
+                _shiftDown = true;
+            }
+            if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.LeftShift)
+            {
+                _shiftDown = false;
+            }
+            
+            if (_mouseDown)
             {
                 //Get mouse position of cursor
                 Vector2 screenPos = Event.current.mousePosition;
@@ -50,7 +73,7 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                 screenPos.y = scene.camera.pixelHeight - screenPos.y;
                 Vector2 worldSpace = scene.camera.ScreenToWorldPoint(screenPos);
                 
-                Draw(Target.Generator.Grid,worldSpace,Event.current.button == 1);
+                Draw(Target.Generator.Grid,worldSpace,_shiftDown);
             }
         }
 

@@ -23,7 +23,7 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                     }
                     float scalar =  1 - (distanceSqr / (_radius * _radius));
                     
-                    Target.Generator.Grid.DrawPoint(x,y).Terrain = 1.0f;
+                    Target.Generator.Grid.DrawPoint(x,y).Terrain += Time.fixedDeltaTime * scalar;
                     Target.Generator.Grid.DrawPoint(x, y).Solid = solid;
                 }
             }
