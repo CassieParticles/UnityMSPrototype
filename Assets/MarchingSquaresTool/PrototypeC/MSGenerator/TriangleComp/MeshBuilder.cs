@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MarchingSquaresTool.PrototypeC.Core;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator.TriangleComp
 
         private List<Vector3> _vertices;
         private List<int> _indices;
+
+        private void OnValidate()
+        {
+            _meshFilter = GetComponent<MeshFilter>();
+        }
+
         private void Awake()
         {
             _meshFilter = GetComponent<MeshFilter>();

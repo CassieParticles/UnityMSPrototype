@@ -10,6 +10,7 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
         private TextField _levelName;
         private Button _loadButton;
         private Button _saveButton;
+        private Button _generateButton;
 
         private SerializedProperty _levelNameSer;
 
@@ -21,6 +22,7 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             _levelName = new TextField("Level Name") {value = _levelNameSer.stringValue};
             _loadButton = new Button(LoadLevel) { text = "Load Level" };
             _saveButton = new Button(SaveLevel) { text = "Save Level" };
+            _generateButton = new Button(GenerateLevel) { text = "Generate Level" };
             
             //Ensure name is retained in text box
             AssemblyReloadEvents.beforeAssemblyReload += UpdateName;
@@ -62,6 +64,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
                 inspector.Add(_saveButton);
             }
             
+            inspector.Add(_generateButton);
+            
             return inspector;
         }
 
@@ -88,6 +92,12 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             UpdateName();
             
             ((MSLevelEditor)target).SaveLevel();
+        }
+
+        private void GenerateLevel()
+        {
+            ((MSLevelSelector)target).Generator.Clear();
+            ((MSLevelSelector)target).Generator.Generate();
         }
     }
 }
