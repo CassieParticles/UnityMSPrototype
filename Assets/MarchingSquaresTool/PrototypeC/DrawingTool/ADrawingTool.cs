@@ -14,10 +14,15 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
         private bool _mouseDown;
         private bool _shiftDown;
 
+        private Vector2 mousePosition;
+
         private void OnEnable()
         {
-            Target = (MSLevelEditor)target;
-            _mouseDown = false;
+            if (target is MSLevelEditor)
+            {
+                Target = (MSLevelEditor)target;
+                _mouseDown = false;
+            }
         }
 
         private void OnDisable()
@@ -29,6 +34,11 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
 
         public override void OnToolGUI(EditorWindow window)
         {
+            if (Target == null)
+            {
+                return;
+            }
+            
             if (!(window is SceneView))
             {
                 return;
@@ -72,8 +82,10 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                 
                 screenPos.y = scene.camera.pixelHeight - screenPos.y;
                 Vector2 worldSpace = scene.camera.ScreenToWorldPoint(screenPos);
+
+                mousePosition = worldSpace;
                 
-                Draw(Target.Generator.Grid,worldSpace,_shiftDown);
+                Draw(Target.Generator.Grid,worldSpace - (Vector2)Target.transform.position,_shiftDown);
                 
                 //Update marching squares
                 Target.Generator.Clear();
@@ -104,6 +116,9 @@ namespace MarchingSquaresTool.PrototypeC.DrawingTool
                     }
                 }
             }
+
+            Handles.color = Color.green;
+            Handles.DrawSolidDisc(mousePosition,Vector3.forward,0.5f);
         }
     }
 }
