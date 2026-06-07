@@ -19,8 +19,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             _levelNameSer = serializedObject.FindProperty("levelName");
             
             _levelName = new TextField("Level Name") {value = _levelNameSer.stringValue};
-            _loadButton = new Button(LoadLevel) { name = "Load Level" };
-            _saveButton = new Button(SaveLevel) { name = "Save Level" };
+            _loadButton = new Button(LoadLevel) { text = "Load Level" };
+            _saveButton = new Button(SaveLevel) { text = "Save Level" };
             
             //Ensure name is retained in text box
             AssemblyReloadEvents.beforeAssemblyReload += UpdateName;
