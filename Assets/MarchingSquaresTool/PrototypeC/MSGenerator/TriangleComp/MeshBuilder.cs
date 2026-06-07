@@ -56,6 +56,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator.TriangleComp
         public void Clear()
         {
             _meshFilter.mesh = null;
+            _vertices.Clear();
+            _indices.Clear();
         }
     }
 }
