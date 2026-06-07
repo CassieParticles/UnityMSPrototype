@@ -8,5 +8,6 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator.EdgeComp
         public void AddEdge(Edge edge, Vector2Int cellPosition);
         public void SetSolid(bool solid);
         public void Build();
+        public void Clear();
     }
 }

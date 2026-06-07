@@ -44,5 +44,10 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator.TriangleComp
 
             _meshFilter.mesh = mesh;
         }
+
+        public void Clear()
+        {
+            _meshFilter.mesh = null;
+        }
     }
 }

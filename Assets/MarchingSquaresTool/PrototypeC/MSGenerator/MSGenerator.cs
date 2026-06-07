@@ -49,8 +49,7 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             _triangleBuilders = GetComponents<IBuildTriangles>();
             _edgeBuilders = GetComponents<IBuildEdges>();
         }
-
-
+        
         public void Generate()
         {
             //Start in the top left
@@ -141,6 +140,19 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             {
                 builder.SetSolid(solid);
                 builder.Build();
+            }
+        }
+        
+        public void Clear()
+        {
+            foreach (IBuildTriangles builder in _triangleBuilders)
+            {
+                builder.Clear();
+            }
+
+            foreach (IBuildEdges builder in _edgeBuilders)
+            {
+                builder.Clear();
             }
         }
     }
