@@ -78,7 +78,6 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
 
         private void LoadLevel()
         {
-
             UpdateName();
             
             ((MSLevelSelector)target).LoadLevel();

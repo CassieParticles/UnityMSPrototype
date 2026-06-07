@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeC.Core
 {
+    [Serializable]
     public class BodyGrid
     {
         public Cell[] Grid { get; private set; }

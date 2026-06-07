@@ -10,7 +10,20 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
 {
     public class MSGenerator : MonoBehaviour
     {
-        public BodyGrid Grid;
+        public BodyGrid Grid
+        {
+            get
+            {
+                //If grid is null, set to empty grid; then return the grid
+                return grid ??= new BodyGrid();
+            }
+            
+            set =>  grid = value;
+        }
+        
+        //Serialize so it survives reloads, should not be visible in inspector
+        [SerializeField]
+        private BodyGrid grid;
 
         private IBuildTriangles[] _triangleBuilders;
         private IBuildEdges[] _edgeBuilders;
@@ -19,12 +32,10 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
         private void OnValidate()
         {
             Init();
-            Grid = new BodyGrid();
         }
 
         private void Awake()
         {
-            
             Init();
         }
 
@@ -43,8 +54,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
         public void Generate()
         {
             //Start in the top left
-            Vector2Int position = -Grid.Origin;
-            Vector2Int size = Grid.Size;
+            Vector2Int position = -grid.Origin;
+            Vector2Int size = grid.Size;
 
             bool solid = false;
 
@@ -54,15 +65,15 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
                 {
                     float[] cornerValues =
                     {
-                        Grid[x,y].Terrain,
-                        Grid[x + 1,y].Terrain,
-                        Grid[x + 1,y + 1].Terrain,
-                        Grid[x,y + 1].Terrain,
+                        grid[x,y].Terrain,
+                        grid[x + 1,y].Terrain,
+                        grid[x + 1,y + 1].Terrain,
+                        grid[x,y + 1].Terrain,
                     };
-                    solid = solid || Grid[x, y].Solid;
-                    solid = solid || Grid[x + 1, y].Solid;
-                    solid = solid || Grid[x + 1, y + 1].Solid;
-                    solid = solid || Grid[x, y + 1].Solid;
+                    solid = solid || grid[x, y].Solid;
+                    solid = solid || grid[x + 1, y].Solid;
+                    solid = solid || grid[x + 1, y + 1].Solid;
+                    solid = solid || grid[x, y + 1].Solid;
 
 
                     int index = 0;

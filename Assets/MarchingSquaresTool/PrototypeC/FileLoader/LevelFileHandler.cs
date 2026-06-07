@@ -67,7 +67,7 @@ namespace MarchingSquaresTool.PrototypeC.FileLoader
             out uint originY)
         {
             //Level doesn't exist
-            if (File.Exists(Application.dataPath + LevelPath + title + ".lvl"))
+            if (!File.Exists(Application.dataPath + LevelPath + title + ".lvl"))
             {
                 width = 0;
                 height = 0;
