@@ -25,6 +25,8 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
         [SerializeField]
         private BodyGrid grid;
 
+        [SerializeField] private float value;
+
         private IBuildTriangles[] _triangleBuilders;
         private IBuildEdges[] _edgeBuilders;
 
