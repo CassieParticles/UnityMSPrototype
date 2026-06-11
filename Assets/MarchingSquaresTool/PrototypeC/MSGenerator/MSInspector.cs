@@ -28,6 +28,7 @@ namespace MarchingSquaresTool.PrototypeC.MSGenerator
             AssemblyReloadEvents.beforeAssemblyReload += UpdateName;
             AssemblyReloadEvents.afterAssemblyReload += UpdateTextBox;
 
+            //TODO: Move this to the level selector and editor directly
             if (target is MSLevelEditor)
             {
                 AssemblyReloadEvents.beforeAssemblyReload += SaveLevel;
