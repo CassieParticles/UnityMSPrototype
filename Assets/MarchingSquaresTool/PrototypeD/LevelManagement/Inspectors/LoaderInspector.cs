@@ -21,6 +21,12 @@ namespace MarchingSquaresTool.PrototypeD.LevelManagement.Inspectors
 
         public void OnSceneGUI()
         {
+            if (levelName == null)
+            {
+                return;
+                
+            }
+            
             Target.levelName = levelName.text;
         }
 
