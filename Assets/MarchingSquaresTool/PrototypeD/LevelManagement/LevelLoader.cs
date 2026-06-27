@@ -1,4 +1,5 @@
 ﻿using MarchingSquaresTool.PrototypeD.Generator;
+using UnityEditor;
 using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeD.LevelManagement
@@ -14,6 +15,8 @@ namespace MarchingSquaresTool.PrototypeD.LevelManagement
         public void LoadLevel()
         {
             Generator.grid = LevelFileHelper.LoadLevel(levelName);
+            Generator.Generate();
+            EditorUtility.SetDirty(Generator);
         }
     }
 }
