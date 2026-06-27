@@ -20,8 +20,10 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
-        private void OnValidate()
+        protected new void OnValidate()
         {
+            base.OnValidate();
+            
             _loops = new List<LinkedList<Vector2>>();
             
             _collider2D = GetComponent<PolygonCollider2D>();

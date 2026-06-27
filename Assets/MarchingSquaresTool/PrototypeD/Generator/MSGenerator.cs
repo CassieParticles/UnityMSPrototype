@@ -14,17 +14,17 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         private List<ATriangleBuilder> _triangleBuilders = new List<ATriangleBuilder>();
         private List<AEdgeBuilder> _edgeBuilders = new List<AEdgeBuilder>();
 
-        private void Awake()
+        protected void Awake()
         {
             InitializeComponents(false);
         }
         
-        private void OnValidate()
+        protected void OnValidate()
         {
             InitializeComponents(true);
         }
 
-        private void InitializeComponents(bool editor)
+        public void InitializeComponents(bool editor)
         {
             _triangleBuilders.Clear();
             _edgeBuilders.Clear();

@@ -12,14 +12,16 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
         private List<Vector3> _vertices;
         private List<int> _indices;
         
-        private void OnValidate()
+        protected new void OnValidate()
         {
+            base.OnValidate();
+            
             _meshFilter = GetComponent<MeshFilter>();
             _vertices = new List<Vector3>();
             _indices = new List<int>();
         }
 
-        private void Awake()
+        protected void Awake()
         {
             _meshFilter = GetComponent<MeshFilter>();
             _vertices = new List<Vector3>();

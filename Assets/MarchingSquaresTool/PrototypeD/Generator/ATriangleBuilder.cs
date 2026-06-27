@@ -1,4 +1,5 @@
-﻿using MarchingSquaresTool.PrototypeD.Core;
+﻿using System;
+using MarchingSquaresTool.PrototypeD.Core;
 using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeD.Generator
@@ -12,5 +13,10 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         
         public  abstract bool IsEditor();
         public  abstract bool IsGame();
+
+        protected void OnValidate()
+        {
+            GetComponent<MSGenerator>().InitializeComponents(true);
+        }
     }
 }
