@@ -58,5 +58,14 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _vertices.Clear();
             _indices.Clear();
         }
+
+        public bool IsEditor()
+        {
+            return false;
+        }
+        public bool IsGame()
+        {
+            return true;
+        }
     }
 }

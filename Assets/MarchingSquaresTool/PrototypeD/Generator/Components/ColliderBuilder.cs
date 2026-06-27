@@ -111,7 +111,17 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
         }
         public void Clear()
         {
-            //idk I'll sort this in a moment
+            _loops.Clear();
+            _collider2D.pathCount = 0;
+        }
+
+        public bool IsEditor()
+        {
+            return false;
+        }
+        public bool IsGame()
+        {
+            return true;
         }
     }
 }

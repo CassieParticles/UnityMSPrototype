@@ -11,26 +11,50 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         [SerializeField]
         public BodyGrid grid;
         
-        private IBuildTriangles[] _triangleBuilders;
-        private IBuildEdges[] _edgeBuilders;
+        private List<IBuildTriangles> _triangleBuilders = new List<IBuildTriangles>();
+        private List<IBuildEdges> _edgeBuilders = new List<IBuildEdges>();
 
         private void Awake()
         {
-            _triangleBuilders = GetComponents<IBuildTriangles>();
-            _edgeBuilders = GetComponents<IBuildEdges>();
+            InitializeComponents(false);
+        }
+        
+        private void OnValidate()
+        {
+            InitializeComponents(true);
+        }
+
+        private void InitializeComponents(bool editor)
+        {
+            _triangleBuilders.Clear();
+            _edgeBuilders.Clear();
+            
+            IBuildTriangles[] tri = GetComponents<IBuildTriangles>();
+            IBuildEdges[] edge = GetComponents<IBuildEdges>();
+
+            //Add only relevant builders
+            foreach (IBuildTriangles builder in tri)
+            {
+                if (editor && builder.IsEditor() || !editor && builder.IsGame())
+                {
+                    _triangleBuilders.Add(builder);
+                }
+            }
+            foreach (IBuildEdges builder in edge)
+            {
+                if (editor && builder.IsEditor() || !editor && builder.IsGame())
+                {
+                    _edgeBuilders.Add(builder);
+                }
+            }
+            
         }
 
         private void Start()
         {
             Rebuild();
         }
-
-        private void OnValidate()
-        {
-            _triangleBuilders = GetComponents<IBuildTriangles>();
-            _edgeBuilders = GetComponents<IBuildEdges>();
-        }
-
+        
         private void Rebuild()
         {
             Clear();

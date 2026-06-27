@@ -9,5 +9,8 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         public void SetSolid(bool solid);
         public void Build();
         public void Clear();
+
+        public bool IsEditor();
+        public bool IsGame();
     }
 }
