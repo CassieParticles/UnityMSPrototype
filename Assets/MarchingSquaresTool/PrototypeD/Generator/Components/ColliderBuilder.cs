@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MarchingSquaresTool.PrototypeD.Generator.Components
 {
     [RequireComponent(typeof(PolygonCollider2D))]
-    public class ColliderBuilder: MonoBehaviour, IBuildEdges
+    public class ColliderBuilder:  AEdgeBuilder
     {
         private List<LinkedList<Vector2>> _loops;
         
@@ -28,7 +28,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
-        public void AddEdge(Edge edge, Vector2Int cellPosition)
+        public override void AddEdge(Edge edge, Vector2Int cellPosition)
         {
             LinkedList<Vector2> attachedToFront = null;
             LinkedList<Vector2> attachedToEnd = null;
@@ -77,14 +77,14 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
         }
         
         
-        public void SetSolid(bool solid)
+        public override void SetSolid(bool solid)
         {
             if (_rigidbody2D)
             {
                 _rigidbody2D.bodyType = solid ?  RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
             }
         }
-        public void Build()
+        public override void Build()
         {
             _collider2D.pathCount = _loops.Count;
             int i = 0;
@@ -109,17 +109,17 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
                 _collider2D.SetPath(i++, loopArray);
             }
         }
-        public void Clear()
+        public override void Clear()
         {
             _loops.Clear();
             _collider2D.pathCount = 0;
         }
 
-        public bool IsEditor()
+        public override bool IsEditor()
         {
             return false;
         }
-        public bool IsGame()
+        public override bool IsGame()
         {
             return true;
         }

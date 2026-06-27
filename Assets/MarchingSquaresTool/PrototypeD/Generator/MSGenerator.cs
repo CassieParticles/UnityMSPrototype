@@ -11,8 +11,8 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         [SerializeField]
         public BodyGrid grid;
         
-        private List<IBuildTriangles> _triangleBuilders = new List<IBuildTriangles>();
-        private List<IBuildEdges> _edgeBuilders = new List<IBuildEdges>();
+        private List<ATriangleBuilder> _triangleBuilders = new List<ATriangleBuilder>();
+        private List<AEdgeBuilder> _edgeBuilders = new List<AEdgeBuilder>();
 
         private void Awake()
         {
@@ -29,18 +29,18 @@ namespace MarchingSquaresTool.PrototypeD.Generator
             _triangleBuilders.Clear();
             _edgeBuilders.Clear();
             
-            IBuildTriangles[] tri = GetComponents<IBuildTriangles>();
-            IBuildEdges[] edge = GetComponents<IBuildEdges>();
+            ATriangleBuilder[] tri = GetComponents<ATriangleBuilder>();
+            AEdgeBuilder[] edge = GetComponents<AEdgeBuilder>();
 
             //Add only relevant builders
-            foreach (IBuildTriangles builder in tri)
+            foreach (ATriangleBuilder builder in tri)
             {
                 if (editor && builder.IsEditor() || !editor && builder.IsGame())
                 {
                     _triangleBuilders.Add(builder);
                 }
             }
-            foreach (IBuildEdges builder in edge)
+            foreach (AEdgeBuilder builder in edge)
             {
                 if (editor && builder.IsEditor() || !editor && builder.IsGame())
                 {
@@ -205,7 +205,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator
                         triangle.B = vertices[MSHelperFunctions.triangleIndexTable[index, i + 1]];
                         triangle.C = vertices[MSHelperFunctions.triangleIndexTable[index, i + 2]];
 
-                        foreach (IBuildTriangles builder in _triangleBuilders)
+                        foreach (ATriangleBuilder builder in _triangleBuilders)
                         {
                             builder.AddTriangle(triangle,new Vector2Int(x,y));
                         }
@@ -218,7 +218,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator
                         edge.A = vertices[MSHelperFunctions.edgeIndexTable[index, i + 0]];
                         edge.B = vertices[MSHelperFunctions.edgeIndexTable[index, i + 1]];
 
-                        foreach (IBuildEdges builder in _edgeBuilders)
+                        foreach (AEdgeBuilder builder in _edgeBuilders)
                         {
                             builder.AddEdge(edge,new Vector2Int(x,y));
                         }
@@ -226,13 +226,13 @@ namespace MarchingSquaresTool.PrototypeD.Generator
                 }
             }
 
-            foreach (IBuildTriangles builder in _triangleBuilders)
+            foreach (ATriangleBuilder builder in _triangleBuilders)
             {
                 builder.SetSolid(false);
                 builder.Build();
             }
 
-            foreach (IBuildEdges builder in _edgeBuilders)
+            foreach (AEdgeBuilder builder in _edgeBuilders)
             {
                 builder.SetSolid(false);
                 builder.Build();
@@ -241,12 +241,12 @@ namespace MarchingSquaresTool.PrototypeD.Generator
         
         public void Clear()
         {
-            foreach (IBuildTriangles builder in _triangleBuilders)
+            foreach (ATriangleBuilder builder in _triangleBuilders)
             {
                 builder.Clear();
             }
 
-            foreach (IBuildEdges builder in _edgeBuilders)
+            foreach (AEdgeBuilder builder in _edgeBuilders)
             {
                 builder.Clear();
             }

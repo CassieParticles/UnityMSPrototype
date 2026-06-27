@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MarchingSquaresTool.PrototypeD.Generator.Components
 {
     [RequireComponent(typeof(MeshFilter),typeof(MeshRenderer))]
-    public class TriangleMeshBuilder: MonoBehaviour, IBuildTriangles
+    public class TriangleMeshBuilder: ATriangleBuilder
     {
         private MeshFilter _meshFilter;
 
@@ -26,7 +26,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _indices = new List<int>();
         }
 
-        public void AddTriangle(Triangle triangle, Vector2Int cellPosition)
+        public override void AddTriangle(Triangle triangle, Vector2Int cellPosition)
         {
             //Lazy approach, may need to be replaced
             _vertices.Add(triangle.A);
@@ -38,12 +38,12 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _indices.Add(_indices.Count);
         }
 
-        public void SetSolid(bool solid)
+        public override void SetSolid(bool solid)
         {
             
         }
 
-        public void Build()
+        public override void Build()
         {
             Mesh mesh = new Mesh();
             mesh.vertices = _vertices.ToArray();
@@ -52,18 +52,18 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _meshFilter.mesh = mesh;
         }
 
-        public void Clear()
+        public override void Clear()
         {
             _meshFilter.mesh = null;
             _vertices.Clear();
             _indices.Clear();
         }
 
-        public bool IsEditor()
+        public override bool IsEditor()
         {
             return false;
         }
-        public bool IsGame()
+        public override bool IsGame()
         {
             return true;
         }

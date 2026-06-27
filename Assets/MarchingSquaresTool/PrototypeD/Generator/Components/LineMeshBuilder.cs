@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MarchingSquaresTool.PrototypeD.Generator.Components
 {
     [RequireComponent(typeof(MeshFilter),typeof(MeshRenderer))]
-    public class LineMeshBuilder : MonoBehaviour, IBuildEdges
+    public class LineMeshBuilder : AEdgeBuilder
     {
         private MeshFilter _meshFilter;
 
@@ -26,7 +26,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _indices = new List<int>();
         }
         
-        public void AddEdge(Edge edge, Vector2Int cellPosition)
+        public override void AddEdge(Edge edge, Vector2Int cellPosition)
         {
             _vertices.Add(edge.A);
             _vertices.Add(edge.B);
@@ -34,11 +34,11 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _indices.Add(_indices.Count);
             _indices.Add(_indices.Count);
         }
-        public void SetSolid(bool solid)
+        public override void SetSolid(bool solid)
         {
             
         }
-        public void Build()
+        public override void Build()
         {
             Mesh mesh = new Mesh();
             mesh.SetVertices(_vertices);
@@ -46,7 +46,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             
             _meshFilter.mesh = mesh;
         }
-        public void Clear()
+        public override void Clear()
         {
             _meshFilter.mesh = null;
             
@@ -54,11 +54,11 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _indices.Clear();
         }
 
-        public bool IsEditor()
+        public override bool IsEditor()
         {
             return true;
         }
-        public bool IsGame()
+        public override bool IsGame()
         {
             return true;
         }
