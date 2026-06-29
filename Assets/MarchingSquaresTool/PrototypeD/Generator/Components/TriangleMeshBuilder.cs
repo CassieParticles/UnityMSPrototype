@@ -63,7 +63,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
 
         public override bool IsEditor()
         {
-            return false;
+            return true;
         }
         public override bool IsGame()
         {

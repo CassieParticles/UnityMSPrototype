@@ -10,14 +10,12 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
         private List<LinkedList<Vector2>> _loops;
         
         private PolygonCollider2D _collider2D;
-        private Rigidbody2D _rigidbody2D;
 
         private void Awake()
         {
             _loops = new List<LinkedList<Vector2>>();
             
             _collider2D = GetComponent<PolygonCollider2D>();
-            _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         protected new void OnValidate()
@@ -27,7 +25,6 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
             _loops = new List<LinkedList<Vector2>>();
             
             _collider2D = GetComponent<PolygonCollider2D>();
-            _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         public override void AddEdge(Edge edge, Vector2Int cellPosition)
@@ -81,10 +78,6 @@ namespace MarchingSquaresTool.PrototypeD.Generator.Components
         
         public override void SetSolid(bool solid)
         {
-            if (_rigidbody2D)
-            {
-                _rigidbody2D.bodyType = solid ?  RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
-            }
         }
         public override void Build()
         {

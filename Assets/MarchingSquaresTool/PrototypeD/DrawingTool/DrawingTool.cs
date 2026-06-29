@@ -8,7 +8,7 @@ namespace MarchingSquaresTool.PrototypeD.DrawingTool
     [EditorTool("Paint", typeof(LevelEditor))]
     public class DrawingTool: ADrawingTool
     {
-        private float _radius = 3f;
+        private readonly float _radius = 2f;
         
         protected override void Draw(Vector2 mousePosition, BodyGrid grid)
         {
@@ -24,7 +24,7 @@ namespace MarchingSquaresTool.PrototypeD.DrawingTool
                     }
                     float scalar =  1 - (distanceSqr / (_radius * _radius));
                     
-                   grid.Paint(x,y) += scalar * Time.fixedDeltaTime;
+                    grid.Paint(x,y)  += scalar * Time.fixedDeltaTime;
                 }
             }
         }

@@ -7,11 +7,13 @@ using UnityEngine;
 
 namespace MarchingSquaresTool.PrototypeD.DrawingTool
 {
-    public abstract class ADrawingTool : EditorTool
+    public abstract class ADrawingTool : EditorTool, IDrawSelectedHandles
     {
         LevelEditor Target;
 
         private bool mouseDown = false;
+
+        private Vector3 mousePosition;
 
         private void OnEnable()
         {
@@ -60,10 +62,22 @@ namespace MarchingSquaresTool.PrototypeD.DrawingTool
                 screenPos.y = scene.camera.pixelHeight - screenPos.y;
                 Vector2 worldSpace = scene.camera.ScreenToWorldPoint(screenPos);
 
+                //Random offset cause it was offset the other way and idk why
                 Draw(worldSpace, Target.Generator.grid);
+                
+                mousePosition  = worldSpace;
+                
+                Target.Generator.Clear();
+                Target.Generator.Generate();
             }
         }
 
         protected abstract void Draw(Vector2 mousePosition, BodyGrid grid);
+        
+        
+        public void OnDrawHandles()
+        {
+            Handles.DrawSolidDisc(mousePosition, Vector3.forward, 0.1f);
+        }
     }
 }

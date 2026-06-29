@@ -55,7 +55,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator
             Rebuild();
         }
         
-        private void Rebuild()
+        public void Rebuild()
         {
             Clear();
             SeparateGrid();
@@ -147,8 +147,6 @@ namespace MarchingSquaresTool.PrototypeD.Generator
                 //Create new object, set it to contain grid
                 GameObject obj = Instantiate(gameObject);
                 obj.GetComponent<MSGenerator>().grid = grid;
-                
-                //obj.GetComponent<MSGenerator>().Generate();
             }
         }
 
