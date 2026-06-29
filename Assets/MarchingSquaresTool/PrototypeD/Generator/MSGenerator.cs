@@ -111,7 +111,7 @@ namespace MarchingSquaresTool.PrototypeD.Generator
                             continue;
                         }
                         
-                        newGrid.Paint(current.x,current.y) = grid[current.x, current.y];
+                        newGrid.Set(current.x,current.y,grid[current.x,current.y]);
                         grid[current.x, current.y] = -1.0f;
 
                         //Check neighbors

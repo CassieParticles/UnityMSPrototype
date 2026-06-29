@@ -24,7 +24,7 @@ namespace MarchingSquaresTool.PrototypeD.DrawingTool
                     }
                     float scalar =  1 - (distanceSqr / (_radius * _radius));
                     
-                    grid.Paint(x,y)  += scalar * Time.fixedDeltaTime;
+                    grid.Add(x,y,scalar * Time.fixedDeltaTime * 5.0f);
                 }
             }
         }

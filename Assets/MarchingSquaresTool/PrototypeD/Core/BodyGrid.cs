@@ -44,11 +44,29 @@ namespace MarchingSquaresTool.PrototypeD.Core
             }
         }
 
-        public ref float Paint(int x, int y)
+        public float Set(int x, int y, float f)
         {
             ExpandToPosition(x,y);
-            return ref grid[GetIndex(x, y)];
+            return  grid[GetIndex(x, y)] = f;
         }
+
+        public float Get(int x, int y)
+        {
+            return grid[GetIndex(x, y)];
+        }
+        
+        public float Add(int x, int y, float f)
+        {
+            ExpandToPosition(x,y);
+            return grid[GetIndex(x, y)] = Mathf.Clamp(grid[GetIndex(x, y)] + f,-1.0f,1.0f);
+        }
+
+        public float Remove(int x, int y, float f)
+        {
+            return Add(x, y, -f);
+        }
+
+
 
         //Expand the grid size to include the position passed in
         public void ExpandToPosition(int x, int y)
