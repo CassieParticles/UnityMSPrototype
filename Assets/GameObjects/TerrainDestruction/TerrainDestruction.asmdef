@@ -1,0 +1,17 @@
+{
+    "name": "TerrainDestruction",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7169f0f2a98950c439508e432cf2e7fb",
+        "GUID:4d1d54e8a32e4542bbebcbe1e93bae6a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
