@@ -1,0 +1,14 @@
+{
+    "name": "Josephparsons.Destructiblelevels.Editor.Tests",
+    "references": [
+        "Josephparsons.Destructiblelevels.Editor",
+        "Josephparsons.Destructiblelevels"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
