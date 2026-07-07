@@ -67,10 +67,13 @@ namespace GameObjects.Player
         {
             Vector2 direction = (cursorPosition - (Vector2)transform.position).normalized;
             WeaponState state = new WeaponState();
+            
             state.bulletSize = 0.1f;
             state.bulletSpeed = 20;
             state.bulletDamage = 20;
             state.explosionRadius = 5;
+            state.bounces = 2;
+            state.gravityScale = 1;
             
             Bullet bullet = Instantiate(bulletPrefab);
             bullet.ReadyBullet((Vector2)transform.position + direction, direction,state);
